@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.integration.nasajon.gui.LancamentoFormController"
+      spacing="10" prefWidth="500" prefHeight="300">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    
+    <GridPane hgap="10" vgap="10">
+        <Label text="Conta:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtConta" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        
+        <Label text="Histórico:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtHistorico" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+        
+        <Label text="Valor:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtValor" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        
+        <Label text="Data:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <DatePicker fx:id="dpData" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        
+        <Label text="Natureza:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="cmbNatureza" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    </GridPane>
+    
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="btnSalvar" text="Salvar" onAction="#onSalvar"/>
+        <Button fx:id="btnCancelar" text="Cancelar" onAction="#onCancelar"/>
+    </HBox>
+</VBox>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.integration.nasajon.gui.MainController"
+            prefHeight="768.0" prefWidth="1024.0">
+    <top>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Integração Contábil Nasajon" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+        </VBox>
+    </top>
+    <center>
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+            <Tab text="Lançamentos">
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Filtros:"/>
+                        <Label text="Status:"/>
+                        <ComboBox fx:id="cmbFiltroStatus" prefWidth="120"/>
+                        <Label text="Data Início:"/>
+                        <DatePicker fx:id="dpDataInicio"/>
+                        <Label text="Data Fim:"/>
+                        <DatePicker fx:id="dpDataFim"/>
+                        <Button text="Aplicar" onAction="#onAtualizarLancamentos"/>
+                    </HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="Novo Lançamento" onAction="#onNovoLancamento"/>
+                        <Button text="Enviar Selecionados" onAction="#onEnviarLancamentos"/>
+                        <Button text="Atualizar" onAction="#onAtualizarLancamentos"/>
+                    </HBox>
+                    <TableView fx:id="tblLancamentos" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+                            <TableColumn fx:id="colConta" text="Conta" prefWidth="100"/>
+                            <TableColumn fx:id="colHistorico" text="Histórico" prefWidth="300"/>
+                            <TableColumn fx:id="colValor" text="Valor" prefWidth="100"/>
+                            <TableColumn fx:id="colData" text="Data" prefWidth="100"/>
+                            <TableColumn fx:id="colNatureza" text="Natureza" prefWidth="80"/>
+                            <TableColumn fx:id="colStatus" text="Status" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+            <Tab text="Logs">
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="Atualizar" onAction="#onAtualizarLogs"/>
+                    </HBox>
+                    <SplitPane dividerPositions="0.7" VBox.vgrow="ALWAYS" orientation="VERTICAL">
+                        <TableView fx:id="tblLogs">
+                            <columns>
+                                <TableColumn fx:id="colTimestamp" text="Data/Hora" prefWidth="150"/>
+                                <TableColumn fx:id="colTipo" text="Tipo" prefWidth="100"/>
+                                <TableColumn fx:id="colMensagem" text="Mensagem" prefWidth="700"/>
+                            </columns>
+                        </TableView>
+                        <VBox spacing="5">
+                            <padding>
+                                <Insets top="5" right="5" bottom="5" left="5"/>
+                            </padding>
+                            <Label text="Detalhes:"/>
+                            <TextArea fx:id="txtDetalhesLog" VBox.vgrow="ALWAYS" editable="false"/>
+                        </VBox>
+                    </SplitPane>
+                </VBox>
+            </Tab>
+            <Tab text="Configurações">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="20">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        
+                        <!-- SQL Server -->
+                        <TitledPane text="Configurações do SQL Server" expanded="true">
+                            <GridPane hgap="10" vgap="10">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                
+                                <Label text="Host:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="txtSqlServerHost" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Porta:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                                <TextField fx:id="txtSqlServerPort" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                                
+                                <Label text="Banco de Dados:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="txtSqlServerDatabase" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Usuário:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextField fx:id="txtSqlServerUser" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Senha:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                                <PasswordField fx:id="txtSqlServerPassword" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+                                
+                                <Label text="Schema:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <TextField fx:id="txtSqlServerSchema" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                
+                                <Button fx:id="btnTestarConexao" text="Testar Conexão" 
+                                        GridPane.rowIndex="4" GridPane.columnIndex="0" 
+                                        GridPane.columnSpan="2" onAction="#onTestarConexao"/>
+                            </GridPane>
+                        </TitledPane>
+                        
+                        <!-- Integração -->
+                        <TitledPane text="Configurações de Integração" expanded="true">
+                            <GridPane hgap="10" vgap="10">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                
+                                <Label text="Tipo de Integração:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="cmbIntegrationType" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                
+                                <Label text="URL da API:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="txtApiUrl" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+                                
+                                <Label text="Token da API:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <PasswordField fx:id="txtApiToken" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+                                
+                                <Label text="Diretório de Saída:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <TextField fx:id="txtOutputDirectory" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+                                
+                                <Label text="Formato do Arquivo:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="cmbFileFormat" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                
+                                <CheckBox fx:id="chkUseFtp" text="Usar FTP" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                
+                                <Label text="Host FTP:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                <TextField fx:id="txtFtpHost" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Usuário FTP:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                                <TextField fx:id="txtFtpUser" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Senha FTP:" GridPane.rowIndex="7" GridPane.columnIndex="2"/>
+                                <PasswordField fx:id="txtFtpPassword" GridPane.rowIndex="7" GridPane.columnIndex="3"/>
+                                
+                                <Label text="Tamanho do Lote:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                                <TextField fx:id="txtBatchSize" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Tentativas de Retry:" GridPane.rowIndex="8" GridPane.columnIndex="2"/>
+                                <TextField fx:id="txtRetryAttempts" GridPane.rowIndex="8" GridPane.columnIndex="3"/>
+                            </GridPane>
+                        </TitledPane>
+                        
+                        <!-- Agendamento -->
+                        <TitledPane text="Configurações de Agendamento" expanded="true">
+                            <GridPane hgap="10" vgap="10">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                
+                                <Label text="Expressão Cron:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="txtScheduleExpression" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+                                
+                                <CheckBox fx:id="chkSchedulingEnabled" text="Habilitar Agendamento" 
+                                          GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                
+                                <Label text="Exemplo: 0 0 22 * * ? (todos os dias às 22h)" 
+                                       GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="4"
+                                       style="-fx-font-style: italic; -fx-text-fill: gray;"/>
+                            </GridPane>
+                        </TitledPane>
+                        
+                        <Button fx:id="btnSalvarConfig" text="Salvar Configurações" 
+                                onAction="#onSalvarConfig" maxWidth="200"/>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+            <Tab text="Agendamento">
+                <VBox spacing="20">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Status do Agendamento:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <Label fx:id="lblStatusAgendamento" text="Inativo" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                               style="-fx-font-weight: bold;"/>
+                        
+                        <Label text="Próxima Execução:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Label fx:id="lblProximaExecucao" text="Agendamento desativado" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    </GridPane>
+                    
+                    <HBox spacing="10">
+                        <Button fx:id="btnIniciarAgendamento" text="Iniciar Agendamento" onAction="#onIniciarAgendamento"/>
+                        <Button fx:id="btnPararAgendamento" text="Parar Agendamento" onAction="#onPararAgendamento"/>
+                        <Button fx:id="btnExecutarAgora" text="Executar Agora" onAction="#onExecutarAgora"/>
+                    </HBox>
+                    
+                    <TitledPane text="Informações sobre Agendamento" expanded="true">
+                        <VBox spacing="10">
+                            <Label text="O agendamento utiliza expressões cron para definir quando a integração será executada automaticamente." wrapText="true"/>
+                            <Label text="Exemplos de expressões cron:" wrapText="true"/>
+                            <Label text="- 0 0 22 * * ? : Todos os dias às 22h" wrapText="true"/>
+                            <Label text="- 0 0 * * * ? : A cada hora" wrapText="true"/>
+                            <Label text="- 0 0/30 * * * ? : A cada 30 minutos" wrapText="true"/>
+                            <Label text="- 0 0 12 ? * MON-FRI : De segunda a sexta às 12h" wrapText="true"/>
+                        </VBox>
+                    </TitledPane>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>
