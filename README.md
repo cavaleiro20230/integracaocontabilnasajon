@@ -4,9 +4,14 @@
 
 Vou refazer a solução para utilizar o SQL Server da Microsoft, incluindo uma interface gráfica e recursos de automação. Esta solução completa permitirá gerenciar todo o processo de integração contábil com o Nasajon.
 
-```typescriptreact project="nasajon_integration"
-...
-```
+![image](https://github.com/user-attachments/assets/02d249e0-5810-477e-bc3c-d5ecf3cf6469)
+![image](https://github.com/user-attachments/assets/de7df22d-1ac6-44cd-b97d-6d729c797022)
+![image](https://github.com/user-attachments/assets/f0074943-f08f-428e-9f56-1dcf0dd2cd87)
+![image](https://github.com/user-attachments/assets/ebd7e4de-8cd1-4fd6-b1c9-74d979db2641)
+
+
+
+
 
 ## Solução de Integração Contábil com SQL Server e Interface Gráfica
 
