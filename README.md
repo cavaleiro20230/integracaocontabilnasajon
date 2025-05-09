@@ -2,7 +2,7 @@
 
 ### Integração Contábil com Nasajon e SQL Server
 
-Vou refazer a solução para utilizar o SQL Server da Microsoft, incluindo uma interface gráfica e recursos de automação. Esta solução completa permitirá gerenciar todo o processo de integração contábil com o Nasajon.
+Solução para utilizar o SQL Server da Microsoft, incluindo uma interface gráfica e recursos de automação. Esta solução completa permitirá gerenciar todo o processo de integração contábil com o Nasajon.
 
 ![image](https://github.com/user-attachments/assets/02d249e0-5810-477e-bc3c-d5ecf3cf6469)
 ![image](https://github.com/user-attachments/assets/de7df22d-1ac6-44cd-b97d-6d729c797022)
